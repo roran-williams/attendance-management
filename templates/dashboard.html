@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Welcome to your Dashboard</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% if is_logged_in %}
+        <a href="{{ url_for('class_list') }}">Class List</a><br>
+        <a href="{{ url_for('register_classes') }}">register_classes</a><br>
+        <a href="{{ url_for('attendance') }}">Attendance</a><br>
+        <a href="{{ url_for('student') }}">students</a><br>
+        <a href="{{ url_for('register') }}">register user</a><br>
+        <a href="{{ url_for('change_password') }}">change password</a><br>
+        <a href="{{ url_for('upload') }}">upload</a><br>
+        <a href="{{ url_for('admin_dashboard') }}">admin dashboard</a><br>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <p>You are not logged in. Please <a href="{{ url_for('login') }}">log in</a>.</p>
+    {% endif %}
+  
+{% endblock %}

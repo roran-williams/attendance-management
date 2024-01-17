@@ -1,0 +1,62 @@
+{% extends 'newbase.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Welcome to your Dashboard</h2>
+
+    <div class="links">
+        <a href="{{ url_for('attendance') }}" class="link-block">Attendance</a><br>
+        <a href="{{ url_for('change_password') }}" class="link-block">Change Password</a><br>
+        <a href="{{ url_for('upload') }}" class="link-block">Upload</a><br>
+        <a href="{{ url_for('download_registration_data') }}" class="link-block">Download Registration Data</a><br>
+        <a href="{{ url_for('admin_attendance_overview') }}" class="link-block">View History</a><br>
+    </div>
+
+    <style>
+        .links {
+            width: 70%;
+            height: 100%;
+        }
+
+        .link-block {
+            display: block;
+            width: 100%; /* Adjust as needed for spacing */
+            height: 100px;
+            margin: 5px;
+            text-align: center;
+            padding: 25px;
+            background-color: yellow;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 2em;
+            width: 100%;
+            height: 100%;
+        }
+
+        section .signin {
+            overflow-y: auto;
+            width: 75%;
+            height: 90%;
+            padding: 25px;
+        }
+    </style>
+
+    <!-- Include Socket.IO client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        // Connect to the Socket.IO server
+        const socket = io('/admin');
+
+        
+        // Listen for the 'new_student_registered' event
+        socket.on('new_student_registered', (data) => {
+            console.log('New student registered:', data);
+            alert(`New student registered!\nName: ${data.first_name} ${data.last_name}\nEmail: ${data.email}`);
+        });
+
+    </script>
+{% endblock %}

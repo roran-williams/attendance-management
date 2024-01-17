@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Attendance Management System{% endblock %}</title>
+    <style type="text/css">
+        /* styles.css */
+
+.alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.success {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.error {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.warning {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <nav>
+            <ul>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </nav>
+        <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <div>
+            {% block content %} {% endblock %}
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>Email: info@example.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
+            <p>Address: 123 Main Street, Cityville, USA</p>
+        </div>
+
+        <!-- Add additional footer content as needed -->
+    </footer>
+
+    <!-- template.html -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends 'newbase.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="signin-container animate__animated animate__fadeIn">
+        <h2>Sign In</h2>
+        <div class="form"> 
+            <form method="post" action="/login">
+                {{ form.hidden_tag() }}
+                <div class="inputBox"> 
+                    {{ form.email.label }}<br>
+                    {{ form.email(class="form-control", placeholder="Email", required=true) }}<br>
+                </div>
+
+                <div class="inputBox">
+                    {{ form.password.label }}<br>
+                    {{ form.password(class="form-control", placeholder="Password", required=true) }}<br>
+                </div>
+
+                <br>
+                <div class="inputBox"> 
+                    <input type="submit" value="Login"> 
+                </div> 
+
+                <br>
+                <br>
+                <div class="links"> <a href="#">Forgot Password</a> <a href="{{ url_for('register') }}">Sign Up</a></div>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+
+    <style type="text/css">
+        .signin-container {
+            width: 30%;
+            height: 70%;
+            color: yellow;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate__animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        .animate__fadeIn {
+            animation-name: fadeIn;
+        }
+    </style>
+{% endblock %}

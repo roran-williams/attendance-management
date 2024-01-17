@@ -1,0 +1,34 @@
+{% extends 'newbase.html' %}
+
+{% block title %}Upload{% endblock %}
+
+{% block content %}
+
+<div id="container">
+    <div id="content">
+        <!-- Your content goes here -->
+        <div>    
+            <p>upload for student data</p>
+
+            <form action="{{ url_for('upload', data_type='students') }}" method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {{ form.file.label }} {{ form.file }}
+                <button type="submit">Upload Students Data</button>
+            </form>
+            <br><br><br>
+        </div>
+
+        <div>
+            <p> upload for units data</p>
+            <form action="{{ url_for('upload', data_type='units') }}" method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {{ form.file.label }} {{ form.file }}
+                <button type="submit">Upload Units Data</button>
+            </form>
+        </div>
+
+    </div>
+
+    
+
+{% endblock %}

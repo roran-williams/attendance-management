@@ -1,0 +1,79 @@
+{% extends 'newbase.html' %}
+
+{% block title %}Admin Attendance Overview{% endblock %}
+
+{% block content %}
+    <div style="max-height: 500px; overflow-y: auto;">
+        <!-- Header Section -->
+        <h2>Welcome to Attendance Overview</h2>
+        
+        <!-- Navigation Buttons -->
+        <a href="{{ url_for('admin_attendance_overview') }}"><button>Home</button></a>
+        <a href="{{ url_for('admin_dashboard') }}"><button>Dashboard</button></a>
+
+        <!-- Search Form -->
+        <form method="POST" action="{{ url_for('admin_attendance_overview') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.search_term.label }} {{ form.search_term }}
+                <button type="submit" class="btn-search">Search</button>
+            </div>
+        </form>
+
+        <!-- Attendance History Section -->
+        {% for student in attendance_history %}
+            <div class="student-info">
+                <h3>{{ student.first_name }} {{ student.last_name }} ({{ student.adm_no }})</h3>
+                <p>Course: {{ student.course }}</p>
+                <p>Trimester: {{ student.trimester }}</p>
+                <p>Group: {{ student.group }}</p>
+                <p>Class: {{ student.class }}</p>
+                
+                <!-- Attendance History List -->
+                <p>Attendance History:</p>
+                <ul class="attendance-list">
+                    {% for entry in student.attendance_history %}
+                        <li>{{ entry.date }} - {{ entry.unit_name }} - {{ entry.status }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <hr class="divider">
+        {% endfor %}
+    </div>
+
+    <!-- Styles -->
+    <style>
+        a { color: yellow; }
+
+        .form-group {
+            margin-bottom: 10px;
+            color: yellow;
+        }
+
+        .btn-search {
+            background-color: yellow;
+            color: black;
+            padding: 5px 10px;
+            border: none;
+        }
+
+        .student-info {
+            margin-bottom: 20px;
+            color: yellow;
+        }
+
+        .attendance-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .divider {
+            border-top: 1px solid #ccc;
+        }
+        section .signin{
+            overflow-y: auto;
+            width:75%;
+            height: 100%;
+        }
+    </style>
+{% endblock %}

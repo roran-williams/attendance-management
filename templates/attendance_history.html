@@ -1,0 +1,99 @@
+{% extends 'newbase.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Attendance History for {{ student.first_name }} {{ student.last_name }}</h2>
+
+    <div class="percentage-bar 
+    {% if attendance_percentage == 100 %}glowing-green
+    {% elif attendance_percentage >= 90 %}excellent-percentage
+    {% elif attendance_percentage >= 70 %}good-percentage
+    {% else %}low-percentage{% endif %}">
+        <div class="percentage-fill" style="width: {{ attendance_percentage }}%;">
+            {{ attendance_percentage }}%
+        </div>
+    </div>
+
+    {% if attendance_percentage < 70 %}
+        <p class="low-percentage">This student's attendance is low. Please make sure to attend more classes.</p>
+    {% else %}
+        <p class="good-percentage">This student's attendance is good. Keep up the good work!</p>
+    {% endif %}
+
+    <!-- ... (rest of the template remains the same) ... -->
+
+    <h2>Previous classes</h2>
+    <table class="attendance-table">
+        <thead>
+            <tr>
+                <th>Unit Code</th>
+                <th>Unit Name</th>
+                <th>Date</th>
+                <th>lecture</th>
+                <th>Attendance Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in attendance_history %}
+                <tr>
+                    <td>{{ entry.unit_code }}</td>
+                    <td>{{ entry.unit_name }}</td>
+                    <td>{{ entry.date }}</td>
+                    <td>{{ entry.lecture }}</td>
+                    <td>{{ entry.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+<style>
+    .percentage-bar {
+        width: 100%;
+        background-color: #555; /* Darker gray */
+        border: 1px solid #333; /* Dark border */
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .glowing-green {
+        background-color: yellow; 
+        box-shadow: 0px 0px 2px 2px yellow;
+    }
+
+    .percentage-fill {
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        color: black;
+    }
+
+    .low-percentage .percentage-fill {
+        background-color: red; /* Red */
+        box-shadow: 0px 0px 10px 5px red;
+    }
+
+    .good-percentage .percentage-fill {
+        background-color: #4caf50; /* Green */
+        box-shadow: 0px 0px 10px 5px #4caf50;
+    }
+
+    .attendance-table {
+        margin-bottom: 20px;
+        background-color: #555; /* Darker gray */
+    }
+
+    .attendance-table th, .attendance-table td {
+        border: 1px solid #333; /* Dark border */
+        padding: 8px;
+        text-align: center;
+        color: #fff; /* White text */
+    }
+
+    .highlight {
+        background-color: #ffff99;
+    }
+</style>
+{% endblock %}

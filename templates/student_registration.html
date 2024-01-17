@@ -1,0 +1,127 @@
+{% extends 'newbase.html' %}
+
+{% block title %}Register - Attendance Management System{% endblock %}
+
+{% block content %}
+    <style>
+      section .signin {
+  
+        width: 75%;
+        height: 100%;
+        }
+       
+
+        form {
+            width: 100%;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-height: 500px; /* Set a maximum height for the form */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Student Registration</h2>
+    <form method="post" action="/student_registration">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label>{{ form.first_name.label }}</label>
+            {{ form.first_name(class="form-control", placeholder="Enter your first name") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.last_name.label }}</label>
+            {{ form.last_name(class="form-control", placeholder="Enter your last name") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.sir_name.label }}</label>
+            {{ form.sir_name(class="form-control", placeholder="Enter your sir name") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.email.label }}</label>
+            {{ form.email(class="form-control", placeholder="Enter your email") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.Adm_no.label }}</label>
+            {{ form.Adm_no(class="form-control", placeholder="Enter your admission number") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.national_id_number.label }}</label>
+            {{ form.national_id_number(class="form-control", placeholder="Enter your national id nubmber") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.campus.label }}</label>
+            {{ form.campus(class="form-control", placeholder="Enter your campus") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.course.label }}</label>
+            {{ form.course(class="form-control", placeholder="Enter your course") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.trimester.label }}</label>
+            {{ form.trimester(class="form-control", placeholder="Enter your trimester") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.group.label }}</label>
+            {{ form.group(class="form-control", placeholder="Enter your group") }}
+        </div>
+
+
+        <!-- Add similar form groups for other fields -->
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% for field, errors in form.errors.items() %}
+  {% for error in errors %}
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+  {% endfor %}
+{% endfor %}
+
+{%endblock%}
